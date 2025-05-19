@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MauiAppTempoSQLite.Models;
 using SQLite;
 
 namespace MauiAppTempoSQLite.Helpers
@@ -14,7 +15,7 @@ namespace MauiAppTempoSQLite.Helpers
         public SQLiteDatabaseHelper(string path)
         {
             _conn = new SQLiteAsyncConnection(path);
-            _conn.CreateTableAsync<Produto>().Wait();
+            _conn.CreateTableAsync<Tempo>().Wait();
         }
 
         public Task<int> Insert(Produto p)
