@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MauiAppTempoSQLite.Models;
+﻿using MauiAppTempoSQLite.Models;
 using SQLite;
 
 namespace MauiAppTempoSQLite.Helpers
@@ -23,7 +18,6 @@ namespace MauiAppTempoSQLite.Helpers
             return _conn.InsertAsync(p);
         }
 
-
         public Task<int> Delete(int id)
         {
             return _conn.Table<Tempo>().DeleteAsync(i => i.Id == id);
@@ -31,15 +25,15 @@ namespace MauiAppTempoSQLite.Helpers
 
         public Task<List<Tempo>> GetAll()
         {
-            return _conn.Table<Tempo>().ToListAsync();
+            return _conn.Table<Tempo>().OrderByDescending(i => i.Id).ToListAsync();
         }
 
         public Task<List<Tempo>> Search(string q)
         {
             string sql = "SELECT * FROM Tempo " +
-                         "WHERE description LIKE '%" + q + "%'";
+                         "WHERE Cidade LIKE '%" + q + "%'";
 
             return _conn.QueryAsync<Tempo>(sql);
         }
-    } // Fecha classe SQLiteDatabaseHelper
+    }
 }
